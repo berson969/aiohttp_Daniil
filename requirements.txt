@@ -1,0 +1,5 @@
+asyncpg
+aiohttp~=3.8.4
+SQLAlchemy=.0.16
+requests~=2.27.1
+more-itertools
