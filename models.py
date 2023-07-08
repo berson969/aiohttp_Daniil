@@ -4,7 +4,7 @@ from sqlalchemy.orm.session import sessionmaker
 from sqlalchemy import JSON, Integer, Column
 
 
-PG_DSN = "postgresql+asyncpg://user:1234@127.0.0.1:5431/netology"
+PG_DSN = "postgresql+asyncpg://some_user:secret@127.0.0.1:5440/asyng_daniil"
 engine = create_async_engine(PG_DSN)
 Base = declarative_base()
 Session = sessionmaker(bind=engine, class_=AsyncSession, expire_on_commit=False)

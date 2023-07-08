@@ -2,7 +2,7 @@ import asyncio
 import datetime
 import aiohttp
 from more_itertools import chunked
-from  models import engine, Session, Base, SwapiPeople
+from models import engine, Session, Base, SwapiPeople
 
 
 async def get_people(people_id):
@@ -24,7 +24,7 @@ async def main():
     async with engine.begin() as con:
         await con.run_sync(Base.metadata.create_all)
 
-    person_coros = (get_people(i) for i in range(1, 50))
+    person_coros = (get_people(i) for i in range(1, 51))
     person_coros_chunked = chunked(person_coros, 5)
 
     for person_coros_chunk in person_coros_chunked:
@@ -33,16 +33,15 @@ async def main():
         tasks = asyncio.all_tasks() - {
             asyncio.current_task(),
         }
-        result=await asyncio.gather(*tasks)
+        result = await asyncio.gather(*tasks)
         print(result)
-
 
 
 if __name__ == "__main__":
     start = datetime.datetime.now()
-    asyncio.set_event_loop_policy(asyncio.WindowsSelectorEventLoopPolicy())
+    # asyncio.set_event_loop_policy(asyncio.WindowsSelectorEventLoopPolicy())
     # data = await resp.json(content_type=None)
-    asyncio.run(main())
+    asyncio.run(main(), debug=True)
     print(datetime.datetime.now() - start)
 
 
